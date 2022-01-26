@@ -1,6 +1,6 @@
 import Foundation
 import SafariServices
-import WebKit
+
 
 public struct BB {
     public private(set) var text = "Hello, World!"
@@ -44,9 +44,8 @@ public struct BB {
         task.resume()
     }
     
-    public func openWebView() -> WKNavigation? {
-        var webview: WKWebView!
-        return webview.load(URLRequest(url: URL(string: "https://google.com")!))
+    public func openWebView() -> SFSafariViewController  {
+        return SFSafariViewController(url: URL(string: "https://www.google.com")!)
        
     }
 }

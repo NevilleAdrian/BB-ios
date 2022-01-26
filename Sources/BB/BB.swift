@@ -1,4 +1,7 @@
 import Foundation
+import SafariServices
+import WebKit
+
 public struct BB {
     public private(set) var text = "Hello, World!"
 
@@ -17,15 +20,19 @@ public struct BB {
         //method, headers
         
         request.httpMethod = "GET"
-        request.setValue("X-Api-Token", forHTTPHeaderField: token)
-        request.setValue("X-User-Id", forHTTPHeaderField: id)
+        request.setValue("a8ef5ffc-f8eb-4186-8652-637f08920ddc", forHTTPHeaderField:"X-Api-Token")
+        
+        request.setValue("MOBILE", forHTTPHeaderField: "X-User-Id")
+        
+       
         
         let task = URLSession.shared.dataTask(with: request){ data, _ , error in
             guard let data = data, error == nil else {
                 return
             }
-            
+            print(data)
             do {
+                
                 let response = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                 print("SUCCESS: \(response)")
             }
@@ -35,5 +42,11 @@ public struct BB {
         }
         
         task.resume()
+    }
+    
+    public func openWebView() -> WKNavigation? {
+        var webview: WKWebView!
+        return webview.load(URLRequest(url: URL(string: "https://google.com")!))
+       
     }
 }
